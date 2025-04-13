@@ -8,18 +8,37 @@ from taxi.views import ManufacturerListView, CarListView, DriverListView
 class SearchTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username="testuser", password="testpass123", license_number="QWE43523"
+            username="testuser",
+            password="testpass123",
+            license_number="QWE43523"
         )
+
         self.client.login(username="testuser", password="testpass123")
 
-        self.manufacturer1 = Manufacturer.objects.create(name="Toyota", country="Japan")
-        self.manufacturer2 = Manufacturer.objects.create(name="Ford", country="USA")
+        self.manufacturer1 = Manufacturer.objects.create(
+            name="Toyota",
+            country="Japan"
+        )
 
-        self.car1 = Car.objects.create(model="Corolla", manufacturer=self.manufacturer1)
-        self.car2 = Car.objects.create(model="Focus", manufacturer=self.manufacturer2)
+        self.manufacturer2 = Manufacturer.objects.create(
+            name="Ford",
+            country="USA"
+        )
+
+        self.car1 = Car.objects.create(
+            model="Corolla",
+            manufacturer=self.manufacturer1
+        )
+
+        self.car2 = Car.objects.create(
+            model="Focus",
+            manufacturer=self.manufacturer2
+        )
 
         self.driver2 = get_user_model().objects.create_user(
-            username="againuser", password="testpass123", license_number="QWE56433"
+            username="againuser",
+            password="testpass123",
+            license_number="QWE56433"
         )
 
     def test_manufacturer_search(self):
